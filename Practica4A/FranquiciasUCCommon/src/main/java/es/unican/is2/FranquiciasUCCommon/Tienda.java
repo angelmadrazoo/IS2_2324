@@ -26,10 +26,18 @@ public class Tienda implements Serializable {
 	 * Constructor de tienda con nombre y direccion
 	 * @param nombre Nombre de la tienda
 	 * @param direccion Direccion de la tienda
+	 * @throws NullDireccionIncorrecto 
+	 * @throws NullNombreIncorrecto 
 	 */
-	public Tienda(String nombre, String direccion) {
+	public Tienda(String nombre, String direccion) throws NullDireccionIncorrecto, NullNombreIncorrecto {
 		this.nombre=nombre;
+		if (nombre == null) {
+			throw new NullNombreIncorrecto(); 
+		}
 		this.direccion= direccion;
+		if (direccion == null) {
+			throw new NullDireccionIncorrecto(); 
+		}
 	}
 	
 
@@ -37,6 +45,7 @@ public class Tienda implements Serializable {
 	 * Retorna el gasto mensual de la tienda en 
 	 * pagar sueldos de sus empleados.
 	 * @return Total mensual sueldos 
+	 * @throws NullFechaIncorrecta 
 	 */
 	public double gastoMensualSueldos() {
 		double total = 0.0;

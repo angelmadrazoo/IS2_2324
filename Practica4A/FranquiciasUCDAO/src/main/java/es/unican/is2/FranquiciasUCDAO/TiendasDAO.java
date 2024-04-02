@@ -83,14 +83,36 @@ public class TiendasDAO implements ITiendasDAO {
 	}
 
 	public Tienda modificarTienda(Tienda nuevo) throws DataAccessException {
-		// TODO
-		return null;
-	}
+        Connection con = H2ServerConnectionManager.getConnection();
+        try {
+            Statement statement = con.createStatement();
+            String updateStatement = String.format("update Tienda set nombre='%s', direccion='%s' where id=%d",
+                    nuevo.getNombre(), nuevo.getDireccion(), nuevo.getId());
+            statement.executeUpdate(updateStatement);
+            statement.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+            throw new DataAccessException();
+        }
+        return nuevo;
+    }
 
 	public Tienda eliminarTienda(long id) throws DataAccessException {
-		// TODO
-		return null;
-	}
+        Connection con = H2ServerConnectionManager.getConnection();
+        Tienda eliminada = null;
+        try {
+            Statement statement = con.createStatement();
+            // Antes de eliminar la tienda, la buscamos para retornarla después
+            eliminada = tienda(id);
+            String deleteStatement = "delete from Tienda where id=" + id;
+            statement.executeUpdate(deleteStatement);
+            statement.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+            throw new DataAccessException();
+        }
+        return eliminada;
+    }
 
 	private Tienda procesaTienda(Connection con, ResultSet results) throws SQLException, DataAccessException {
 		Tienda result = null;

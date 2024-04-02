@@ -1,8 +1,5 @@
 package es.unican.is2.FranquiciasUCCommon;
 
-
-
-
 import java.time.LocalDate;
 import java.time.Period;
 /**
@@ -29,102 +26,74 @@ public class Empleado {
 	 * @param fechaContratacion
 	 * @throws NullNombreIncorrecto 
 	 * @throws NombreVacio 
-	 * @throws NullDniIncorrecto 
-	 * @throws DniFormatoIncorrecto 
-	 * @throws DniVacio 
-	 * @throws NullCategoriaIncorrecto 
-	 * @throws FechaIncorrecta 
 	 * @throws NullFechaIncorrecta 
+	 * @throws NullDniIncorrecto 
+	 * @throws DniVacio 
+	 * @throws DniFormatoIncorrecto 
+	 * @throws NullCategoriaIncorrecto 
 	 */
-	public Empleado(String DNI, String nombre, Categoria categoria, LocalDate fechaContratacion) throws NullNombreIncorrecto, 
-		NombreVacio, NullDniIncorrecto, DniFormatoIncorrecto, DniVacio, NullCategoriaIncorrecto,  NullFechaIncorrecta {
-		
+	public Empleado(String DNI, String nombre, Categoria categoria, LocalDate fechaContratacion) throws NullNombreIncorrecto, NombreVacio, NullFechaIncorrecta, NullDniIncorrecto, DniVacio, DniFormatoIncorrecto, NullCategoriaIncorrecto {
 		this.nombre = nombre;
-		
 		if (nombre == null) {
-			throw new NullNombreIncorrecto();
+			throw new NullNombreIncorrecto(); 
 		}
-		
 		if (nombre.isBlank()) {
-			throw new NombreVacio();
+			throw new NombreVacio(); 
 		}
-		
-		this.DNI=DNI;
-		
+		this.DNI = DNI;
 		if (DNI == null) {
-            throw new NullDniIncorrecto();
-        }
-        
-        if (DNI.length() > 9 || DNI.length() < 9) {
-            throw new DniFormatoIncorrecto();
-        }
-        
-        if (DNI.isEmpty()) {
-            throw new DniVacio();
-        }
+			throw new NullDniIncorrecto(); 
+		}
 		
-		this.categoria=categoria;
+		if (DNI.isBlank()) {
+			throw new DniVacio(); 
+		}
 		
+		if (!DNI.isBlank() && (DNI.length() > 9 || DNI.length() < 9)) {
+			throw new DniFormatoIncorrecto(); 
+		}
+		
+		this.categoria = categoria;
 		if (categoria == null) {
-			throw new NullCategoriaIncorrecto();
+			throw new NullCategoriaIncorrecto(); 
 		}
-		
-		this.fechaContratacion=fechaContratacion;
-		
-		LocalDate fechaActual = LocalDate.now();
-		
+		this.fechaContratacion = fechaContratacion;
 		if (fechaContratacion == null) {
-			throw new NullFechaIncorrecta();
+			throw new NullFechaIncorrecta(); 
 		}
-		
-		
-		
-		
 		
 	}
 	
 	/**
 	 * Retorna el sueldo bruto del empleado
-	 * @throws SueldoIncorrecto 
-	 * @throws NullCategoriaIncorrecto 
-	 * @throws FechaIncorrecta 
-	 * @throws NullFechaIncorrecta 
+	 * @throws NullFechaIncorrecta si la fecha es nula
 	 */
-	public double sueldoBruto() throws SueldoIncorrecto, NullCategoriaIncorrecto,  NullFechaIncorrecta {
-		
+	public double sueldoBruto() {
 		double sueldoCategoria = 0.0;
-		
-		if (categoria == null) {
-			throw new NullCategoriaIncorrecto();
-		}
 		
 		switch(categoria) {
 		case AUXILIAR:
-			sueldoCategoria = 1000;
+			sueldoCategoria = 1000.0;
+			break;
 		case ENCARGADO:
-			sueldoCategoria = 2000;
+			sueldoCategoria = 2000.0;
+			break;
 		case VENDEDOR:
-			sueldoCategoria = 1500;
+			sueldoCategoria = 1500.0;
+			break;
 	
 		}
 		
 		LocalDate fechaActual = LocalDate.now();
-		
-		
-		
-		if (fechaContratacion == null) {
-			throw new NullFechaIncorrecta();
-		}
-		
 	    int antiguedad = Period.between(fechaContratacion, fechaActual).getYears();
-		
 	    double complementoAntiguedad = 0.0;
+	    
 	    if (antiguedad > 20) {
-	        complementoAntiguedad = 200;
+	        complementoAntiguedad = 200.0;
 	    } else if (antiguedad > 10) {
-	        complementoAntiguedad = 100;
+	        complementoAntiguedad = 100.0;
 	    } else if (antiguedad > 5) {
-	        complementoAntiguedad = 50;
+	        complementoAntiguedad = 50.0;
 	    }
 	    
 	    
@@ -134,9 +103,6 @@ public class Empleado {
 	        sueldo *= 0.75; // Reducción del 25%
 	    }
 
-	    if (sueldo < 0) {
-	    	throw new SueldoIncorrecto();
-	    }
 	    
 	    return sueldo;
 		
