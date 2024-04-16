@@ -1,0 +1,10 @@
+Categoria.class
+ITiendasDAO.class
+IGestionTiendas.class
+IEmpleadosDAO.class
+IGestionEmpleados.class
+Tienda.class
+OperacionNoValidaException.class
+Empleado.class
+DataAccessException.class
+IGestionAltasBajas.class
