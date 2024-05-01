@@ -1,0 +1,14 @@
+TiendaIS2
+Avda. de los Castros s/n
+
+Senior
+  Nombre: Juan Id: 1 DNI: 11111111A TotalVentasMes: 8015.0 TotalComision: 80.14999999999998
+  Nombre: Marta Id: 2 DNI: 222222222A TotalVentasMes: 8307.0 TotalComision: 83.07000000000001
+  Nombre: Marcos Id: 3 DNI: 333333333A TotalVentasMes: 23334.0 TotalComision: 101.38
+
+Junior
+  Nombre: Pedro Id: 4 DNI: 44444444A TotalVentasMes: 13402.0 TotalComision: 79.01
+  Nombre: Maria Id: 5 DNI: 55555555A TotalVentasMes: 5527.0 TotalComision: 2.11
+
+Practicas
+  Nombre: Patricia Id: 6 DNI: 66666666A TotalVentasMes: 1600.0
